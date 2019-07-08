@@ -7,15 +7,15 @@ const width = (canvas.width = window.innerWidth);
 const height = (canvas.height = window.innerHeight);
 const balls = [];
 const evilCircleP1 = new EvilCircle(300, 300, true, "#fff", 15);
-const evilCircleP2 = new EvilCircle(
-  width - 300,
-  height - 300,
-  true,
-  "#0ff",
-  15
-);
+// const evilCircleP2 = new EvilCircle(
+//   width - 300,
+//   height - 300,
+//   true,
+//   "#0ff",
+//   15
+// );
 
-let stop = false;
+let stop = true;
 // 生成随机数的函数
 function random(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -197,7 +197,7 @@ EvilCircle.prototype.collisionDetect = function() {
 function loop(number = 100, ballLine = 4) {
   ctx.fillStyle = `rgba(0,0,0,${1 / ballLine})`;
   ctx.fillRect(0, 0, width, height);
-  evilCircleP2.draw();
+  // evilCircleP2.draw();
   evilCircleP1.draw();
 
   while (balls.length < number) {
@@ -213,7 +213,7 @@ function loop(number = 100, ballLine = 4) {
     balls.push(ball);
   }
   evilCircleP1.checkBounds();
-  evilCircleP2.checkBounds();
+  // evilCircleP2.checkBounds();
   for (let ball of balls) {
     if (ball.exists) {
       ball.draw();
@@ -225,7 +225,7 @@ function loop(number = 100, ballLine = 4) {
       ctx.fillStyle = "rgba(0,0,0,0.25)";
       ctx.fillRect(0, 0, width, height);
       evilCircleP1.draw();
-      evilCircleP2.draw();
+      // evilCircleP2.draw();
     } else {
       requestAnimationFrame(loop.bind(this, number, ballLine));
     }
@@ -234,7 +234,7 @@ function loop(number = 100, ballLine = 4) {
     ctx.fillStyle = "rgb(0,0,0)";
     ctx.fillRect(0, 0, width, height);
     evilCircleP1.draw();
-    evilCircleP2.draw();
+    // evilCircleP2.draw();
   }
 }
 
@@ -250,4 +250,4 @@ window.addEventListener("keypress", e => {
 });
 
 evilCircleP1.setControls("w", "d", "s", "a");
-evilCircleP2.setControls("up", "right", "down", "left");
+// evilCircleP2.setControls("up", "right", "down", "left");
