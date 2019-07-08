@@ -142,59 +142,31 @@ EvilCircle.prototype.checkBounds = function() {
   this.collisionDetect();
 };
 EvilCircle.prototype.setControls = function(mode) {
-  if (mode === "w") {
     window.addEventListener("keydown", e => {
       if (!stop) {
         if (e.key === "a") {
-          this.x -= this.velX;
-          if (this.size > 2) {
-            this.size -= 2;
-          }
+          this.x -= Math.max(this.size/2,this.velX);
+          // if (this.size > 10) {
+          //   this.size -= 2;
+          // }
         } else if (e.key === "d") {
-          this.x += this.velX;
-          if (this.size > 2) {
-            this.size -= 2;
-          }
+          this.x += Math.max(this.size/2,this.velX);
+          // if (this.size > 10) {
+          //   this.size -= 2;
+          // }
         } else if (e.key === "w") {
-          this.y -= this.velY;
-          if (this.size > 2) {
-            this.size -= 2;
-          }
+          this.y -= Math.max(this.size/2,this.velY);
+          // if (this.size > 10) {
+          //   this.size -= 2;
+          // }
         } else if (e.key === "s") {
-          this.y += this.velY;
-          if (this.size > 2) {
-            this.size -= 2;
-          }
+          this.y += Math.max(this.size/2,this.velY);
+          // if (this.size > 10) {
+          //   this.size -= 2;
+          // }
         }
       }
     });
-  } else if (mode === "up") {
-    window.addEventListener("keydown", e => {
-      if (!stop) {
-        if (e.keyCode === 37) {
-          this.x -= this.velX;
-          if (this.size > 2) {
-            this.size -= 2;
-          }
-        } else if (e.keyCode === 39) {
-          this.x += this.velX;
-          if (this.size > 2) {
-            this.size -= 2;
-          }
-        } else if (e.keyCode === 38) {
-          this.y -= this.velY;
-          if (this.size > 2) {
-            this.size -= 2;
-          }
-        } else if (e.keyCode === 40) {
-          this.y += this.velY;
-          if (this.size > 2) {
-            this.size -= 2;
-          }
-        }
-      }
-    });
-  }
 };
 EvilCircle.prototype.collisionDetect = function() {
   for (let ball of balls) {
