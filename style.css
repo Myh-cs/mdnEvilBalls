@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
 }
 
@@ -13,13 +14,40 @@ body {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   letter-spacing: -1px;
   position: absolute;
   margin: 0;
   top: -4px;
   right: 5px;
+  color: #fff;
+}
 
-  color: transparent;
-  text-shadow: 0 0 4px white;
+.action {
+  position: fixed;
+  width: 162px;
+  margin-right: -81px;
+  bottom: 40px;
+  right: 50%;
+}
+#number {
+  display: block;
+  width: 162px;
+  background-color: transparent;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #fff;
+  height: 2rem;
+  line-height: 2rem;
+  padding-left: 1rem;
+}
+#start,
+#reset {
+  font-size: 2rem;
+  letter-spacing: -1px;
+  background-color: transparent;
+  color: #fff;
+  border-radius: 10px;
 }

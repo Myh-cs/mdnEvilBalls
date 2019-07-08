@@ -1,0 +1,30 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.2",
+    "workspace": "/Users/tw/Downloads/start",
+    "linecount": [
+        {
+            "version": "0.2.2",
+            "counttime": "2019-07-08 16:53:22",
+            "filesum": 1,
+            "codesum": 222,
+            "commentsum": 16,
+            "blanksum": 17,
+            "statistics": {
+                ".js": {
+                    "code": 222,
+                    "comment": 16,
+                    "blank": 17
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 17,
+                    "code": 222,
+                    "comment": 16,
+                    "filename": "main.js"
+                }
+            ]
+        }
+    ]
+}

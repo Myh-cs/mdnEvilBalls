@@ -5,17 +5,40 @@ const ctx = canvas.getContext("2d");
 // 设定画布长宽
 const width = (canvas.width = window.innerWidth);
 const height = (canvas.height = window.innerHeight);
-const balls = [];
-const evilCircleP1 = new EvilCircle(300, 300, true, "#fff", 15);
-// const evilCircleP2 = new EvilCircle(
-//   width - 300,
-//   height - 300,
-//   true,
-//   "#0ff",
-//   15
-// );
-
+let balls = [];
+let evilCircleP1;
 let stop = true;
+let ballNumber = 100;
+function init() {
+  ctx.clearRect(0, 0, width, height);
+  document.getElementsByTagName("h1")[0].innerText = `已经吃了${0}个，还剩${
+    balls.length
+  }个存活`;
+  balls = [];
+  evilCircleP1 = new EvilCircle(300, 300, true, "#fff", 5);
+  // const evilCircleP2 = new EvilCircle(
+  //   width - 300,
+  //   height - 300,
+  //   true,
+  //   "#0ff",
+  //   15
+  // );
+  stop = true;
+  evilCircleP1.setControls("w", "d", "s", "a");
+  // evilCircleP2.setControls("up", "right", "down", "left");
+  window.addEventListener("keypress", e => {
+    if (e.keyCode === 32) {
+      if (stop) {
+        requestAnimationFrame(function() {
+          loop();
+        });
+      }
+      stop = !stop;
+    }
+  });
+  loop();
+}
+
 // 生成随机数的函数
 function random(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -98,7 +121,7 @@ function EvilCircle(x, y, exists, color, size) {
 
 EvilCircle.prototype.draw = function() {
   ctx.beginPath();
-  ctx.lineWidth = 3;
+  ctx.lineWidth = 1;
   ctx.strokeStyle = this.color;
   ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
   ctx.stroke();
@@ -184,7 +207,7 @@ EvilCircle.prototype.collisionDetect = function() {
         ball.recoverTime = new Date() - 0 + 5000;
         this.eat += 1;
         if (this.size < 300) {
-          this.size += 5;
+          this.size += ball.size / 2;
         }
         document.getElementsByTagName("h1")[0].innerText = `已经吃了${
           this.eat
@@ -194,20 +217,20 @@ EvilCircle.prototype.collisionDetect = function() {
   }
 };
 
-function loop(number = 100, ballLine = 4) {
+function loop(ballLine = 4) {
   ctx.fillStyle = `rgba(0,0,0,${1 / ballLine})`;
   ctx.fillRect(0, 0, width, height);
   // evilCircleP2.draw();
   evilCircleP1.draw();
 
-  while (balls.length < number) {
+  while (balls.length < ballNumber) {
     var ball = new Ball(
       random(0, width),
       random(0, height),
       random(-7, 7),
       random(-7, 7),
       randomColor(),
-      random(10, 20),
+      random(2, 5),
       true
     );
     balls.push(ball);
@@ -227,7 +250,7 @@ function loop(number = 100, ballLine = 4) {
       evilCircleP1.draw();
       // evilCircleP2.draw();
     } else {
-      requestAnimationFrame(loop.bind(this, number, ballLine));
+      requestAnimationFrame(loop.bind(this, ballLine));
     }
   } else {
     ctx.clearRect(0, 0, width, height);
@@ -238,18 +261,34 @@ function loop(number = 100, ballLine = 4) {
   }
 }
 
-window.addEventListener("keypress", e => {
-  if (e.keyCode === 32) {
-    if (stop) {
-      requestAnimationFrame(function() {
-        loop();
-      });
-    }
-    stop = !stop;
+init();
+
+const start = document.body.querySelector("#start");
+const number = document.body.querySelector("#number");
+const reset = document.body.querySelector("#reset");
+start.addEventListener("click", () => {
+  if (stop) {
+    requestAnimationFrame(function() {
+      loop();
+    });
   }
+  stop = !stop;
+  start.style.display = "none";
+  number.style.display = "none";
 });
-
-evilCircleP1.setControls("w", "d", "s", "a");
-// evilCircleP2.setControls("up", "right", "down", "left");
-
-loop()
+reset.addEventListener("click", () => {
+  init();
+  start.style.display = "inline-block";
+  number.style.display = "block";
+});
+number.addEventListener("input", e => {
+  console.log(e.target.value);
+  if (e.target.value <= 100 && e.target.value >= 10) {
+    ballNumber = e.target.value;
+  } else if (e.target.value >= 100) {
+    ballNumber = 100;
+  } else {
+    ballNumber = 10;
+  }
+  init();
+});
