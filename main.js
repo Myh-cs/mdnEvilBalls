@@ -251,3 +251,5 @@ window.addEventListener("keypress", e => {
 
 evilCircleP1.setControls("w", "d", "s", "a");
 // evilCircleP2.setControls("up", "right", "down", "left");
+
+loop()
