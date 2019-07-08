@@ -113,7 +113,7 @@ Ball.prototype.collisionDetect = function() {
 };
 
 function EvilCircle(x, y, exists, color, size) {
-  Shape.call(this, x, y, 30, 30, exists);
+  Shape.call(this, x, y, 5, 5, exists);
   this.color = color;
   this.size = size;
   this.eat = 0;
