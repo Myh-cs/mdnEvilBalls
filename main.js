@@ -12,7 +12,7 @@ let ballNumber = 100;
 function init() {
   ctx.clearRect(0, 0, width, height);
   document.getElementsByTagName("h1")[0].innerText = `已经吃了${0}个，还剩${
-    balls.length
+    ballNumber
   }个存活`;
   balls = [];
   evilCircleP1 = new EvilCircle(300, 300, true, "#fff", 5);
